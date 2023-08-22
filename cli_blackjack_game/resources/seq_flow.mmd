@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant User as U
+    participant CLI as C
+    participant Game as G
+    participant Player as P
+    participant Dealer as D
+    participant Deck as Dk
+    participant Card as Cd
+    participant AsciiArt as A
+    participant Utils as Ut
+
+    U->>C: Start the game
+    C->>G: start_game()
+    G->>C: print_welcome_message()
+    C->>G: get_bet_amount()
+    G->>G: place_bet(bet_amount)
+    G->>G: deal_initial_cards()
+    G->>C: print_game_state()
+    C->>G: get_action()
+    G->>G: hit() / stand() / double_down()
+    G->>C: print_game_state()
+    G->>G: calculate_score(hand)
+    G->>G: calculate_winnings(outcome)
+    G->>C: print_game_outcome(outcome)
+    G->>C: print_winnings()
+    C->>C: play_again()
+    C->>G: play_again()
+    G->>C: start_game()
+    C->>G: print_welcome_message()
+    ...

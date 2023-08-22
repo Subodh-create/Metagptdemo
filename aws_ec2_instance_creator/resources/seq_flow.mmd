@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant User
+    participant WebApp
+    participant Database
+    participant AWS
+
+    User->>WebApp: Open web application
+    WebApp->>User: Render homepage
+    User->>WebApp: Select instance type and configuration options
+    WebApp->>User: Display selected options
+    User->>WebApp: Confirm options
+    WebApp->>User: Display progress and status
+    WebApp->>Database: Save instance configuration
+    Database->>WebApp: Return instance configuration ID
+    WebApp->>User: Display progress and status
+    WebApp->>AWS: Create EC2 instance
+    AWS->>WebApp: Return instance ID
+    WebApp->>Database: Save instance
+    Database->>WebApp: Return instance ID
+    WebApp->>User: Display progress and status
+    User->>WebApp: View instances
+    WebApp->>Database: Retrieve instances
+    Database->>WebApp: Return instances
+    WebApp->>User: Display instances

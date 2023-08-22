@@ -1,0 +1,92 @@
+classDiagram
+    class Game {
+        -Player player
+        -Dealer dealer
+        -Deck deck
+        -int bet_amount
+        -int winnings
+        +__init__(self)
+        +start_game(self)
+        +place_bet(self, bet_amount: int)
+        +deal_initial_cards(self)
+        +hit(self)
+        +stand(self)
+        +double_down(self)
+        +calculate_score(self, hand: List[Card]) -> int
+        +calculate_winnings(self, outcome: str)
+        +display_game_state(self)
+        +display_game_outcome(self, outcome: str)
+        +display_winnings(self)
+        +play_again(self)
+    }
+
+    class Player {
+        -List[Card] hand
+        -int score
+        +__init__(self)
+        +add_card(self, card: Card)
+        +clear_hand(self)
+        +get_hand(self) -> List[Card]
+        +get_score(self) -> int
+    }
+
+    class Dealer {
+        -List[Card] hand
+        -int score
+        +__init__(self)
+        +add_card(self, card: Card)
+        +clear_hand(self)
+        +get_hand(self) -> List[Card]
+        +get_score(self) -> int
+        +should_hit(self) -> bool
+    }
+
+    class Deck {
+        -List[Card] cards
+        +__init__(self)
+        +shuffle(self)
+        +deal_card(self) -> Card
+    }
+
+    class Card {
+        -str suit
+        -str rank
+        +__init__(self, suit: str, rank: str)
+        +get_suit(self) -> str
+        +get_rank(self) -> str
+        +get_value(self) -> int
+    }
+
+    class AsciiArt {
+        +__init__(self)
+        +get_card_art(self, card: Card) -> str
+    }
+
+    class CLI {
+        -Game game
+        -AsciiArt ascii_art
+        +__init__(self)
+        +start(self)
+        +print_welcome_message(self)
+        +get_bet_amount(self) -> int
+        +print_game_state(self)
+        +get_action(self) -> str
+        +print_game_outcome(self, outcome: str)
+        +print_winnings(self)
+        +play_again(self) -> bool
+    }
+
+    class Utils {
+        +clear_screen()
+        +print_colorful_message(message: str, color: str)
+    }
+
+    Game "1" -- "1" Player: has
+    Game "1" -- "1" Dealer: has
+    Game "1" -- "1" Deck: has
+    Player "1" -- "n" Card: has
+    Dealer "1" -- "n" Card: has
+    Deck "1" -- "n" Card: has
+    CLI "1" -- "1" Game: has
+    CLI "1" -- "1" AsciiArt: has
+    CLI "1" -- "1" Utils: has

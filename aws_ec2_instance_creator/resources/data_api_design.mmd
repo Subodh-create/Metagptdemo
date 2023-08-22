@@ -1,0 +1,43 @@
+classDiagram
+    class EC2Instance {
+        +id: str
+        +instance_type: str
+        +storage_options: dict
+        +networking_settings: dict
+        +status: str
+        +create_instance(): None
+        +get_status(): str
+        +update_status(status: str): None
+    }
+
+    class EC2InstanceConfig {
+        +id: str
+        +instance_type: str
+        +storage_options: dict
+        +networking_settings: dict
+        +save(): None
+        +load(id: str): EC2InstanceConfig
+    }
+
+    class User {
+        +id: str
+        +name: str
+        +email: str
+        +password: str
+        +authenticate(password: str): bool
+        +create_instance(config: EC2InstanceConfig): EC2Instance
+        +get_instances(): List[EC2Instance]
+    }
+
+    class Database {
+        +save_instance_config(config: EC2InstanceConfig): None
+        +load_instance_config(id: str): EC2InstanceConfig
+        +save_instance(instance: EC2Instance): None
+        +load_instance(id: str): EC2Instance
+    }
+
+    EC2Instance "1" -- "1" EC2InstanceConfig: has
+    User "1" -- "n" EC2Instance: has
+    User "1" -- "n" EC2InstanceConfig: has
+    Database "1" -- "n" EC2Instance: has
+    Database "1" -- "n" EC2InstanceConfig: has

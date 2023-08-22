@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AWS EC2 Instance Creator</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>AWS EC2 Instance Creator</h1>
+    <form action="/instances" method="POST">
+        <h2>Instance Type</h2>
+        <select name="instance_type">
+            <option value="t2.micro">t2.micro</option>
+            <option value="t2.small">t2.small</option>
+            <option value="t2.medium">t2.medium</option>
+        </select>
+
+        <h2>Storage Options</h2>
+        <label for="storage_size">Storage Size (GB):</label>
+        <input type="number" name="storage_size" id="storage_size" min="1" max="1000" required>
+
+        <h2>Networking Settings</h2>
+        <label for="vpc">VPC:</label>
+        <input type="text" name="vpc" id="vpc" required>
+
+        <label for="subnet">Subnet:</label>
+        <input type="text" name="subnet" id="subnet" required>
+
+        <label for="security_group">Security Group:</label>
+        <input type="text" name="security_group" id="security_group" required>
+
+        <h2>Review and Confirm</h2>
+        <p>Instance Type: <span id="instance_type"></span></p>
+        <p>Storage Size: <span id="storage_size"></span> GB</p>
+        <p>VPC: <span id="vpc"></span></p>
+        <p>Subnet: <span id="subnet"></span></p>
+        <p>Security Group: <span id="security_group"></span></p>
+
+        <input type="submit" value="Create Instance">
+    </form>
+</body>
+</html>
